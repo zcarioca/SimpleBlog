@@ -1,0 +1,4 @@
+SimpleBlog
+==========
+
+My simple blog

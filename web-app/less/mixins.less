@@ -1,0 +1,44 @@
+@BAR_COLOR: darken(#6E0185, 10%);
+@BG_DIALOG: #303830;
+@FG_DIALOG: #ffffff;
+@BG_COLOR: #42520E;
+@HL_COLOR: #9BA40D;
+@LINK_COLOR: darken(@BAR_COLOR, 5%);
+@CONTENT_COLOR: #C1BC69;
+
+.radius(@TL_RAD, @TR_RAD, @BR_RAD, @BL_RAD) {
+   -webkit-border-top-left-radius: @TL_RAD;
+   -webkit-border-top-right-radius: @TR_RAD;
+   -webkit-border-bottom-right-radius: @BR_RAD;
+   -webkit-border-bottom-left-radius: @BL_RAD;
+   -moz-border-radius: @TL_RAD @TR_RAD @BR_RAD @BL_RAD;
+   border-radius: @TL_RAD @TR_RAD @BR_RAD @BL_RAD;
+} 
+
+.gradient(@TOP_COLOR, @BOTTOM_COLOR) {
+   background-color: @TOP_COLOR; /* Old browsers */
+   background-image: -moz-linear-gradient(top, @TOP_COLOR 0%, @BOTTOM_COLOR 100%); /* FF3.6+ */
+   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@TOP_COLOR), color-stop(100%,@BOTTOM_COLOR)); /* Chrome,Safari4+ */
+   background-image: -webkit-linear-gradient(top, @TOP_COLOR 0%,@BOTTOM_COLOR 100%); /* Chrome10+,Safari5.1+ */
+   background-image: -o-linear-gradient(top, @TOP_COLOR 0%,@BOTTOM_COLOR 100%); /* Opera 11.10+ */
+   background-image: -ms-linear-gradient(top, @TOP_COLOR 0%,@BOTTOM_COLOR 100%); /* IE10+ */
+   background-image: linear-gradient(to bottom, @TOP_COLOR 0%,@BOTTOM_COLOR 100%); /* W3C */
+}
+
+.radial(@CL_CENTER, @CL_EDGE) {
+   background-color: blendColorsRgb(@CL_EDGE, @CL_CENTER); /* Old browsers */
+   background-image: -moz-radial-gradient(center, ellipse cover,  @CL_CENTER 0%, @CL_EDGE 100%); /* FF3.6+ */
+   /* @alternate */ background-image: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,@CL_CENTER), color-stop(100%,@CL_EDGE)); /* Chrome,Safari4+ */
+   /* @alternate */ background-image: -webkit-radial-gradient(center, ellipse cover,  @CL_CENTER 0%,@CL_EDGE 100%); /* Chrome10+,Safari5.1+ */
+   /* @alternate */ background-image: -o-radial-gradient(center, ellipse cover,  @CL_CENTER 0%,@CL_EDGE 100%); /* Opera 12+ */
+   /* @alternate */ background-image: -ms-radial-gradient(center, ellipse cover,  @CL_CENTER 0%,@CL_EDGE 100%); /* IE10+ */
+   /* @alternate */ background-image: radial-gradient(ellipse at center,  @CL_CENTER 0%,@CL_EDGE 100%); /* W3C */
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+}
+
+.boxShadow(@SHIFT_X, @SHIFT_Y, @BLUR, @SHADOW_COLOR) {
+   -moz-box-shadow: @SHIFT_X @SHIFT_Y @BLUR @SHADOW_COLOR;
+   -webkit-box-shadow: @SHIFT_X @SHIFT_Y @BLUR @SHADOW_COLOR;
+   box-shadow: @SHIFT_X @SHIFT_Y @BLUR @SHADOW_COLOR;
+}

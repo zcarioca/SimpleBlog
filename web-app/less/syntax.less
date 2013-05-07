@@ -1,0 +1,120 @@
+@import "mixins.less";
+
+@BLUE:  #8bf;
+@RED:  #f66;
+@GREEN:  #7f7;
+@GREY:  #eee;
+@VIOLET: #c390b2;
+
+div.code_style {
+  background-color: #000;
+  color: @FG_DIALOG;
+  white-space: nowrap;
+  margin: .5em 1em .5em 2em;
+  padding: 1em;
+  font-size: 11pt;
+  font-style: normal;
+  font-weight: normal;
+  overflow: auto;
+  font-family: 'Courier New',Courier,monospace;
+  border: 1px dotted darken(@CONTENT_COLOR, 30%);
+}
+.code_style .de1, .code_style .de2 {
+  color: @BLUE;
+  font-weight: normal;
+}
+.code_style a:link {
+  color: @BLUE;
+}
+.code_style a:hover {
+  background-color: lighten(@BLUE, 15%);
+}
+.code_style .imp {
+  font-weight: bold;
+  color: @RED;
+}
+.code_style li, .code_style .li1 {
+  color: @BLUE;
+  padding-bottom: 2px;
+}
+.code_style .ln {
+  width: 1px;
+  text-align: right;
+  margin: 0;
+  padding: 0 2px;
+  vertical-align: top;
+}
+.code_style .kw1 {
+  color: @FG_DIALOG;
+  font-weight: bold;
+}
+.code_style .kw2, .code_style .kw4 {
+  color: darken(@BLUE, 5%);
+  font-weight: bold;
+}
+.code_style .kw3 {
+  color: @VIOLET;
+  font-weight: bold;
+}
+.code_style .co0 {
+  color: darken(@GREY, 5%);
+  font-style: italic;
+}
+.code_style .co1 {
+  color: darken(@RED, 10%);
+  font-style: normal;
+}
+.code_style .co2 {
+  color: darken(@RED, 5%);
+  font-style: italic;
+}
+.code_style .co3 {
+  color: @FG_DIALOG;
+  font-weight: bold;
+}
+.code_style .co4 {
+  color: darken(@GREY, 5%);
+}
+.code_style .coMULTI {
+  font-style: normal;
+}
+.code_style .es0, .code_style .es1 {
+  color: darken(@BLUE, 5%);
+  font-weight: normal;
+}
+.code_style .es1 {
+  font-weight: bold;
+}
+.code_style .es2, .code_style .es3, .code_style .es4 {
+  color: @GREEN;
+}
+.code_style .es5 {
+  color: @VIOLET;
+}
+.code_style .es_h {
+  color: lighten(@BLUE, 5%);
+  font-weight: bold;
+}
+.code_style .br0 {
+  color: @VIOLET;
+  font-weight: bold;
+}
+.code_style .sy0 {
+  color: @FG_DIALOG;
+  font-weight: bold;
+}
+.code_style .st0, .code_style .st_h {
+  color: @RED;
+}
+.code_style .nu0 {
+  color: @FG_DIALOG;
+}
+.code_style .re0, .code_style .re1, .code_style .re2, .code_style .re4 {
+  color: @GREEN;
+}
+.code_style .re5 {
+  color: lighten(@VIOLET, 10%);
+}
+.code_style span.xtra {
+  display: block;
+}

@@ -1,0 +1,15 @@
+<div class="content-header">
+   <h2 ng-show="loading">Loading...</h2>
+   <h2>{{page.title}}</h2>
+</div>
+<div class="blog-nav-links">
+   <div class="next"><a href="#/proj">back</a></div>
+</div>
+<div class="content-content">
+   <h3>{{page.title}}</h3>
+   <div ng-show="loading">Loading...</div>
+   <div ng-bind-html-unsafe="page.content"></div>
+</div>
+<div class="blog-nav-links">
+   <div class="next"><a href="#/proj">back</a></div>
+</div>

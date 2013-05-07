@@ -1,0 +1,18 @@
+<div class="content-header">
+   <h2>Projects</h2>
+   <div class="proj-roll-actions">
+      <input type="checkbox" id="details" ng-model="blogDetails"/>
+      <label for="details">show details</label>
+      <input type="text" ng-model="query"/>
+   </div>
+</div>
+<div class="content-content">
+   <p>The following is a list of some of my current projects in alphabetical order.</p>
+   <div ng-show="loading">Loading...</div>
+   <div ng-repeat="post in posts | filter : filterQuery" class="proj-roll-item" ng-class="$index % 2 == 0 && 'even' || 'odd'">
+      <a class="proj-roll-link" href="{{post.link}}">{{post.title}}</a>
+      <div class="proj-roll-details" hideon="blogDetails">
+         <div class="proj-roll-preview" ng-bind-html-unsafe="post.content"></div>
+      </div>
+   </div>
+</div>

@@ -374,7 +374,6 @@ dd {
 blockquote {
   margin: 0 3em;
   padding: 0 0.5em;
-  border: 1px dotted #000000;
   -webkit-border-top-left-radius: 5px;
   -webkit-border-top-right-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
@@ -387,6 +386,33 @@ blockquote {
   -webkit-border-bottom-left-radius: 5px;
   -moz-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
+}
+code {
+  font-family: "Courier New", Courier, monospace;
+}
+pre {
+  margin: 0 3em;
+  padding: 5px 5px 5px 1em;
+  font-family: "Courier New", Courier, monospace;
+  background-color: #000;
+  color: #fff;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+pre code {
+  display: block;
+  border-left: 1px dotted #fff;
+  padding: 0.2em 0.2em 0.2em 0.5em;
 }
 .content-content a {
   color: #2f0039;

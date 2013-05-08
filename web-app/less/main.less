@@ -151,8 +151,23 @@ dd {
 blockquote {
    margin: 0 3em;
    padding: 0 0.5em;
-   border: 1px dotted darken(@BG_COLOR, 25%);
    .radius(5px, 5px, 5px, 5px);
+}
+code {
+   font-family: "Courier New", Courier, monospace;
+}
+pre {
+   margin: 0 3em;
+   padding: 5px 5px 5px 1em;
+   font-family: "Courier New", Courier, monospace;
+   background-color: #000;
+   color: #fff;
+   .radius(5px, 5px, 5px, 5px);
+   code {
+       display: block;
+       border-left: 1px dotted #fff;
+       padding: 0.2em 0.2em 0.2em 0.5em;
+   }
 }
 .content-content a {
    color: @LINK_COLOR;

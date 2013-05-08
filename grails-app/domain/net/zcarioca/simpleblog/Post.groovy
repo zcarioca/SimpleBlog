@@ -5,7 +5,6 @@ import java.util.Date
 class Post {
 
    String title
-   String synopsis
    String body
 
    boolean published = false
@@ -18,8 +17,7 @@ class Post {
    static constraints = {
       author nullable: false
       title blank: false, unique: true, maxSize: 150
-      synopsis nullable: true, maxSize: 500
-      body nullable: true, maxSize: 60000
+      body nullable: true, maxSize: 100000
 
       published nullable: false
       publishedDate nullable: false

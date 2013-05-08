@@ -13,8 +13,11 @@ environments {
     development {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/zcarioca-dev"
-            username = "zcarioca-dev"
+            driverClassName = "org.h2.Driver"
+            username = "sa"
+            password = ""
+            url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+//            url = "jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/zcarioca-dev"
         }
     }
     test {

@@ -41,6 +41,8 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 
+        runtime "org.jsoup:jsoup:1.7.2"
+        runtime "org.markdownj:markdownj:0.3.0-1.0.2b4"
         runtime 'mysql:mysql-connector-java:5.1.22'
     }
 
@@ -67,6 +69,6 @@ grails.project.dependency.resolution = {
         compile ':cache:1.0.1'
 
         runtime ":navigation:1.3.2"
-	runtime ":cloud-bees:0.6.2"
+        runtime ":cloud-bees:0.6.2"
     }
 }

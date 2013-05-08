@@ -1,11 +1,14 @@
 package net.zcarioca.simpleblog
 
-import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat
 
-import org.apache.commons.lang.WordUtils;
+import com.petebevin.markdown.MarkdownProcessor
+import org.apache.commons.lang.WordUtils
 import org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib
 
+
 class RestService {
+   SynopsisService synopsisService
    def grailsApplication
    def g = new ApplicationTagLib()
    
@@ -148,7 +151,7 @@ class RestService {
          ],
          'date': sdf.format(post.publishedDate),
          'url' : "${g.resource(dir: '/')}json/post/${post.id}",
-         'content': "<p>${post.synopsis}</p>"
+         'content': synopsisService.makeSynopsis(post.body)
       ]
    }
    
@@ -165,7 +168,7 @@ class RestService {
          ],
          'date': sdf.format(proj.publishedDate),
          'url' : "${g.resource(dir: '/')}json/project/${proj.id}",
-         'content': "<p>${proj.synopsis}</p>"
+         'content': synopsisService.makeSynopsis(proj.body)
       ]
    }
    
@@ -198,7 +201,7 @@ class RestService {
             'name': proj.author.username,
             'url': "${g.resource(dir: '/')}json/post/author/${proj.author.username}"
          ],
-         'content' : proj.body
+         'content' : toHTML(proj.body)
       ]
    }
    
@@ -214,7 +217,7 @@ class RestService {
             'name': post.author.username,
             'url': "${g.resource(dir: '/')}json/post/author/${post.author.username}"
          ],
-         'content' : post.body,
+         'content' : toHTML(post.body),
          'categories' : []
       ]
       
@@ -242,8 +245,12 @@ class RestService {
             'name': page.author.username,
             'url': "${g.resource(dir: '/')}json/post/author/${page.author.username}"
          ],
-         'content' : page.body
+         'content' : toHTML(page.body)
       ]
+   }
+   
+   private def toHTML(markdown) {
+      return new MarkdownProcessor().markdown(markdown)
    }
    
    private def toSlug(title) {

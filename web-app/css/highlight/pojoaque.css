@@ -9,9 +9,11 @@ Based on Solarized Style from http://ethanschoonover.com/solarized
 pre code {
   display: block; padding: 0.5em;
   color: #DCCF8F;
-  background: url(./pojoaque.jpg) repeat scroll left top #181914;
+  /* background: url(./pojoaque.jpg) repeat scroll left top #181914; */
+  background-color: #181914;
 }
 
+pre .annotation,
 pre .comment,
 pre .template_comment,
 pre .diff .header,

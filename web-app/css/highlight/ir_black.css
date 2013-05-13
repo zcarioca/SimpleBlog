@@ -7,11 +7,13 @@ pre code {
   background: #000; color: #f8f8f8;
 }
 
+pre .annotation,
 pre .shebang,
 pre .comment,
 pre .template_comment,
 pre .javadoc {
-  color: #7c7c7c;
+  color: #9c9cbc;
+  font-style: italic;
 }
 
 pre .keyword,
@@ -21,6 +23,8 @@ pre .request,
 pre .status,
 pre .clojure .attribute {
   color: #96CBFE;
+  color: #FE6c6c;
+  font-weight: bold;
 }
 
 pre .sub .keyword,
@@ -28,6 +32,7 @@ pre .method,
 pre .list .title,
 pre .nginx .title {
   color: #FFFFB6;
+  font-weight: normal;
 }
 
 pre .string,

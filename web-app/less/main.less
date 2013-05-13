@@ -155,19 +155,19 @@ code {
 }
 
 pre {
-   margin: 0 3em;
+   margin: 0 1.5em;
    padding: 0.3em;
    font-family: "Courier New", Courier, monospace;
-   background-color: #272822;
+   background-color: #000;
    color: #fff;
    .radius(8px, 8px, 8px, 8px);
    code {
        display: block;
+       overflow: auto;
        li {
-          max-width: 100%;
-          white-space: normal;
+          white-space: pre-wrap;
           &.odd {
-             background-color: lighten(#272822, 10%);
+             background-color: lighten(#000, 5%);
           }
        }
    }

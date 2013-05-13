@@ -12,10 +12,10 @@ var CodeBlockParser = {
          angular.forEach(preTags, function(preTag) {
             var codeTags = preTag.getElementsByTagName('code');
             angular.forEach(codeTags, function(codeTag) {
-               if (!codeTag.hasAttribute('class')) {
+               if (!codeTag.hasAttribute('class') || codeTag.getAttribute('class').indexOf('pretty-print') === -1) {
                   hljs.highlightBlock(codeTag, null, false);
+                  codeTag.setAttribute('class', codeTag.getAttribute('class') + ' pretty-print');
                }
-               //codeTag.setAttribute('class', 'prettyprint');
                var lines = CodeBlockParser.getLines(codeTag),
                    newHtml = '<ol>',
                    idx = 0; 

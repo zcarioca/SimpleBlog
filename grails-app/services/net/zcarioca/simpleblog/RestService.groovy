@@ -250,7 +250,7 @@ class RestService {
    }
    
    private def toHTML(markdown) {
-      return new MarkdownProcessor().markdown(markdown)
+      return synopsisService.makeHTML(markdown)
    }
    
    private def toSlug(title) {

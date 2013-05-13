@@ -410,11 +410,13 @@ pre code {
   display: block;
   overflow: auto;
 }
-pre code li {
+pre code li,
+pre code div {
   white-space: pre-wrap;
 }
-pre code li.odd {
-  background-color: #0d0d0d;
+pre code li.odd,
+pre code div.odd {
+  background-color: #1a1a1a;
 }
 .content-content a {
   color: #2f0039;

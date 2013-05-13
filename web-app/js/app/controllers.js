@@ -16,17 +16,19 @@ var CodeBlockParser = {
                   hljs.highlightBlock(codeTag, null, false);
                   codeTag.setAttribute('class', codeTag.getAttribute('class') + ' pretty-print');
                }
+               /*
                var lines = CodeBlockParser.getLines(codeTag),
-                   newHtml = '<ol>',
+                   newHtml = '',
                    idx = 0; 
                
                angular.forEach(lines, function(line) {
                   var className = (idx % 2) === 0 ? 'even' : 'odd'
-                  newHtml += '<li class="'+className +'">' + line + '</li>';
+                  newHtml += '<div class="'+className +'">' + line + '</div>';
                   idx += 1;
                });
-               newHtml += '</ol>';
+               newHtml += '';
                codeTag.innerHTML = newHtml;
+               */
             });
          });
       });

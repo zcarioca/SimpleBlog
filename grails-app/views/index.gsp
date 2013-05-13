@@ -45,6 +45,8 @@
 <!--[if lt IE 9]>
 <r:resourceLink dir="css" file="app-main-ie.css"/>
 <![endif]-->
+<r:resourceLink dir="css/highlight" file="monokai.css"/>
+<script type="text/javascript" src="${resource(dir: 'js', file: 'highlight.pack.js')}"></script>
 <r:require modules="angular, app"/>
 <r:layoutResources/>
 </head>

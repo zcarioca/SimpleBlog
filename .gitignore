@@ -46,3 +46,4 @@ tignore for Grails 1.2 and 1.3
 /.link_to_grails_plugins
 /devDb.h2.db
 /devDb.trace.db
+/devDb.lock.db

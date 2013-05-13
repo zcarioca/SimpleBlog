@@ -127,10 +127,6 @@ p {
    margin: 1.25em 0;
    line-height: 1.3;
 }
-code {
-   font-family: monospace;
-   font-size: 11pt;
-}
 strong {
    font-weight: bold;
 }
@@ -155,18 +151,25 @@ blockquote {
 }
 code {
    font-family: "Courier New", Courier, monospace;
+   font-size: 11pt;
 }
+
 pre {
    margin: 0 3em;
-   padding: 5px 5px 5px 1em;
+   padding: 0.3em;
    font-family: "Courier New", Courier, monospace;
-   background-color: #000;
+   background-color: #272822;
    color: #fff;
-   .radius(5px, 5px, 5px, 5px);
+   .radius(8px, 8px, 8px, 8px);
    code {
        display: block;
-       border-left: 1px dotted #fff;
-       padding: 0.2em 0.2em 0.2em 0.5em;
+       li {
+          max-width: 100%;
+          white-space: normal;
+          &.odd {
+             background-color: lighten(#272822, 10%);
+          }
+       }
    }
 }
 .content-content a {

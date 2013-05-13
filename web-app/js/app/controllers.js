@@ -1,3 +1,37 @@
+var CodeBlockParser = {
+   
+   getLines : function(codeTag) {
+      var text = codeTag.innerHTML;
+      text = text.replace(/^(\s+)|(\s+)$/, '');
+      return text.split('\n');
+   },
+   
+   setupLines : function() {
+      setTimeout(function() {
+         var preTags = document.getElementsByTagName('pre');
+         angular.forEach(preTags, function(preTag) {
+            var codeTags = preTag.getElementsByTagName('code');
+            angular.forEach(codeTags, function(codeTag) {
+               if (!codeTag.hasAttribute('class')) {
+                  hljs.highlightBlock(codeTag, null, false);
+               }
+               //codeTag.setAttribute('class', 'prettyprint');
+               var lines = CodeBlockParser.getLines(codeTag),
+                   newHtml = '<ol>',
+                   idx = 0; 
+               
+               angular.forEach(lines, function(line) {
+                  var className = (idx % 2) === 0 ? 'even' : 'odd'
+                  newHtml += '<li class="'+className +'">' + line + '</li>';
+                  idx += 1;
+               });
+               newHtml += '</ol>';
+               codeTag.innerHTML = newHtml;
+            });
+         });
+      });
+   }
+};
 var MainMenuController = [ '$scope', 'DataLookupService', 'MainLookupService', function($scope, DataLookupService, MainLookupService) {
    $scope.pages = [];
    $scope.loading = true;
@@ -54,6 +88,7 @@ var PageContentController = [ '$scope', 'DataLookupService', 'PageLookupService'
          $scope.loading = false;
          $scope.page = data.page;
          DataLookupService.activatePage(data.page.slug);
+         
       });
    });
 }];
@@ -110,6 +145,7 @@ var BlogContentController = [ '$scope', 'DataLookupService', 'BlogLookupService'
          $scope.page.showNext = post.next === null ? false : true;
          $scope.page.showPrev = post.prev === null ? false : true;
          DataLookupService.activatePage('blog');
+         CodeBlockParser.setupLines();
       });
    });
 }];

@@ -118,6 +118,7 @@ var ProjContentController = [ '$scope', 'DataLookupService', 'ProjectLookupServi
          $scope.page.showNext = false;
          $scope.page.showPrev = false;
          DataLookupService.activatePage('proj');
+         CodeBlockParser.setupLines();
       });
    });
 }];

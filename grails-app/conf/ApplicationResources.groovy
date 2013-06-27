@@ -14,6 +14,7 @@ modules = {
     }
     
     'app' {
+       resource url: 'css/screen.css', disposition: 'head'
        resource url: 'js/app/modules.js', disposition: 'head'
        resource url: 'js/app/services.js', disposition: 'head'
        resource url: 'js/app/controllers.js', disposition: 'head'

@@ -32,44 +32,38 @@
       s.parentNode.insertBefore(ga, s);
    })();
 </script>
-<style type="text/css">
-@font-face {
-  font-family: 'Black Ops One';
-  font-style: normal;
-  font-weight: 400;
-  src: url('${resource(dir:"fonts", file:"black_ops_one.woff")}') format('woff');
-}
-</style>
-<r:resourceLink dir="css" file="reset.css"/>
-<r:resourceLink dir="css" file="app-main.css"/>
-<!--[if lt IE 9]>
-<r:resourceLink dir="css" file="app-main-ie.css"/>
-<![endif]-->
 <r:resourceLink dir="css/highlight" file="ir_black.css"/>
 <script type="text/javascript" src="${resource(dir: 'js', file: 'highlight.pack.js')}"></script>
 <r:require modules="angular, app"/>
 <r:layoutResources/>
 </head>
 <body id="ng-app" ng-app="zcarioca">
-   <div id="page">
-      <div id="header">
-         <h1>Z Carioca</h1>
-      </div>
+   <div class="container">
+      <header class="main">
+         <figure>
+            <img src="${resource(dir: 'images', file: 'masthead_2.png') }" title="Z Carioca" alt="Z Carioca"/>
+         </figure>
+         <h1 id="logo">Z Carioca</h1>
+      </header>
+      <!-- end header.main -->
       <a href="#body-content" class="nav-skip">Skip Navigation</a>
-      <div id="body">
-         <div id="main-menu" ng-controller="MainMenuController">
-            <ul>
-               <li ng-repeat="page in pages" ng-class="page.state">
-                  <a href="{{page.link}}" ng-class="page.state" ng-click="setActive(page.slug)">{{page.title}}</a>
-               <li>
-            </ul>
-         </div>
-         <div id="body-content" ng-view></div>
-      </div>
-      <div id="footer">
+      <aside class="main">
+         <nav ng-controller="MainMenuController">
+            <a ng-repeat="page in pages" href="{{page.link}}" ng-click="setActive(page.slug)" ng-class="page.state">
+               {{page.title}}
+            </a>
+         </nav>
+      </aside>
+      <!-- end aside.main -->
+      <section id="body-content" class="content" ng-view>
+      </section>
+      <footer>
+         <figure>
+            <img src="${resource(dir: 'images', file:'footer.png') }"/>
+         </figure>
          <div class="login"><g:link controller="admin">login</g:link></div>
          <div class="copy">&copy; 2013 - ZCarioca.net.  All rights reserved</div>
-      </div>
+      </footer>
    </div>
 </body>
 </html>

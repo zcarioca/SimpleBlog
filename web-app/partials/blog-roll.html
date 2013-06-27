@@ -1,19 +1,20 @@
-<div class="content-header">
-   <h2>Blog</h2>
-   <div class="blog-roll-actions">
+<article>
+   <nav>
       <input type="checkbox" id="details" ng-model="blogDetails"/>
       <label for="details">show details</label>
       <input type="text" ng-model="query"/>
-   </div>
-</div>
-<div class="content-content">
+   </nav>
+   <header>
+      <h2>Blog</h2>
+   </header>
    <div ng-show="loading">Loading...</div>
-   <div ng-repeat="post in posts | filter : filterQuery" class="blog-roll-item" ng-class="$index % 2 == 0 && 'even' || 'odd'">
-      <a class="blog-roll-link" href="{{post.link}}">{{post.title}}</a>
-      <div class="blog-roll-date">{{post.date}}</div>
+   <article ng-repeat="post in posts | filter : filterQuery" ng-class="$index % 2 == 0 && 'even' || 'odd'">
+      <header>
+         <a href="{{post.link}}">{{post.title}}</a>
+         <time>{{post.date}}</time>
+      </header>
       <div class="blog-roll-details" hideon="blogDetails">
-         <div class="blog-roll-author">{{post.author.name}}</div>
          <div class="blog-roll-preview" ng-bind-html-unsafe="post.content"></div>
       </div>
-   </div>
-</div>
+   </article>
+</article>

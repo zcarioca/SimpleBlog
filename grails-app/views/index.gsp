@@ -7,6 +7,7 @@
 <script src="${g.resource(dir: 'js', file: 'html5shiv.js')}"></script>
 <script src="${g.resource(dir: 'js', file: 'json3.min.js')}"></script>
 <script src="${g.resource(dir: 'js', file: 'angular.shiv.js')}"></script>
+<script src="${g.resource(dir: 'js', file: 'respond.min.js')}"></script>
 <![endif]-->
 <script type="text/javascript">
    var baseUrl = '<g:resource dir="json"/>';

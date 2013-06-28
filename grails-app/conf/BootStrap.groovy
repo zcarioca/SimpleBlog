@@ -1,11 +1,10 @@
-import java.text.SimpleDateFormat;
-
-import grails.converters.JSON;
-import net.zcarioca.simpleblog.User
 import net.zcarioca.simpleblog.Role
+import net.zcarioca.simpleblog.User
 import net.zcarioca.simpleblog.UserRole
 
 class BootStrap {
+   
+   def restService
 
    def init = { servletContext ->
       def role = Role.findByAuthority('ROLE_USER') ?: new Role(authority:'ROLE_USER').save()

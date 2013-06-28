@@ -144,7 +144,7 @@ class RestService {
          'id':post.id,
          'version': post.version,
          'title': post.title,
-         'slug' : toSlug(post.title),
+         'slug' : post.slug ?: toSlug(post.title),
          'author' : [
             'name':post.author.username,
             'url': "${g.resource(dir: '/')}json/post/author/${post.author.username}"
@@ -161,7 +161,7 @@ class RestService {
          'id':proj.id,
          'version': proj.version,
          'title': proj.title,
-         'slug' : toSlug(proj.title),
+         'slug' : proj.slug ?: toSlug(proj.title),
          'author' : [
             'name':proj.author.username,
             'url': "${g.resource(dir: '/')}json/post/author/${proj.author.username}"
@@ -176,7 +176,7 @@ class RestService {
       SimpleDateFormat sdf = newSDF()
       return [
          'title': page.title,
-         'slug' : toSlug(page.title),
+         'slug' : page.slug ?: toSlug(page.title),
          'author': [
             'name': page.author.username,
             'url': "${g.resource(dir: '/')}json/post/author/${page.author.username}"
@@ -193,7 +193,7 @@ class RestService {
       SimpleDateFormat sdf = newSDF()
       return [
          'title' : proj.title,
-         'slug' : toSlug(proj.title),
+         'slug' : proj.slug ?: toSlug(proj.title),
          'id' : proj.id,
          'date' : sdf.format(proj.publishedDate),
          'version': proj.version,
@@ -209,7 +209,7 @@ class RestService {
       SimpleDateFormat sdf = newSDF()
       def content = [
          'title' : post.title,
-         'slug' : toSlug(post.title),
+         'slug' : post.slug ?: toSlug(post.title),
          'id' : post.id,
          'date' : sdf.format(post.publishedDate),
          'version': post.version,
@@ -236,7 +236,7 @@ class RestService {
       SimpleDateFormat sdf = newSDF()
       return [
          'title':page.title,
-         'slug' : toSlug(page.title),
+         'slug' : page.slug ?: toSlug(page.title),
          'id': page.id,
          'date': sdf.format(page.publishedDate),
          'version': page.version,
@@ -253,7 +253,7 @@ class RestService {
       return synopsisService.makeHTML(markdown)
    }
    
-   private def toSlug(title) {
+   def toSlug(title) {
       String slug = title.toLowerCase()
       slug = slug.replaceAll("[^a-z0-9]", '-')
       slug = slug.replaceAll(/\-+/, '-')

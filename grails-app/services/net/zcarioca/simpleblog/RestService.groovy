@@ -249,7 +249,7 @@ class RestService {
       ]
    }
    
-   private def toHTML(markdown) {
+   def toHTML(markdown) {
       return synopsisService.makeHTML(markdown)
    }
    

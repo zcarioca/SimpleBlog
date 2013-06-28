@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>Z Carioca - Software Developer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<g:if test="${!isBot}">
+<g:if test="${isUser}">
 <link href="${g.resource(dir: 'css', file: 'screen.css')}" rel="stylesheet" type="text/css" media="screen, projection"/>
 <!--[if lt IE 9]>
 <script src="${g.resource(dir: 'js', file: 'html5shiv.js')}"></script>
@@ -42,7 +42,7 @@
       s.parentNode.insertBefore(ga, s);
    })();
 </script>
-<g:if test="${!isBot}">
+<g:if test="${isUser}">
 <r:resourceLink dir="css/highlight" file="ir_black.css"/>
 <script type="text/javascript" src="${resource(dir: 'js', file: 'highlight.pack.js')}"></script>
 <r:require modules="angular, app"/>
@@ -52,9 +52,11 @@
 <body id="ng-app" ng-app="zcarioca">
    <div class="container">
       <header class="main">
+         <g:if test="${isUser }">
          <figure>
             <img src="${resource(dir: 'images', file: 'masthead_2.png') }" title="Z Carioca" alt="Z Carioca"/>
          </figure>
+         </g:if>
          <h1 id="logo">Z Carioca</h1>
       </header>
       <!-- end header.main -->
@@ -79,12 +81,20 @@
       </aside>
       <!-- end aside.main -->
       <section id="body-content" class="content" ng-view>
+         <g:if test="${isBot}">
+            <article>
+               <h1>${title}</h1>
+               ${body }
+            </article>
+         </g:if>
       </section>
       <footer>
+         <g:if test="${isUser}">
          <figure>
             <img src="${resource(dir: 'images', file:'footer.png') }"/>
          </figure>
          <div class="login"><g:link controller="admin">login</g:link></div>
+         </g:if>
          <div class="copy">&copy; 2013 - ZCarioca.net.  All rights reserved</div>
       </footer>
    </div>

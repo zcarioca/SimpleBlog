@@ -95,7 +95,7 @@ factory('DataLookupService',[ '$location', function($location) {
             next.prev = {id:post.id, slug:post.slug};
             post.next = {id:next.id, slug:next.slug};
          }
-         post.link = "#/blog/" + post.slug;
+         post.link = "#!/blog/" + post.slug;
          this.posts.push(post);
          this.runCallback(post);
       },
@@ -113,7 +113,7 @@ factory('DataLookupService',[ '$location', function($location) {
             next.prev = {id:project.id, slug:project.slug};
             project.next = {id:next.id, slug:next.slug};
          }
-         project.link = '#/proj/' + project.slug;
+         project.link = '#!/proj/' + project.slug;
          this.projects.push(project);
          this.runCallback(project);
       },

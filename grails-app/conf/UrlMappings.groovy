@@ -15,7 +15,7 @@ class UrlMappings {
       "/json/page/$id" (controller: 'rest', action: 'loadPage')
       "/json/$action" (controller: 'rest')
 
-		"/"(view:"/index")
+		"/"(controller:"index")
 		"500"(view:'/error')
 	}
 }

@@ -9,12 +9,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>Z Carioca - Software Developer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<g:if test="${!isBot}">
+<link href="${g.resource(dir: 'css', file: 'screen.css')}" rel="stylesheet" type="text/css" media="screen, projection"/>
 <!--[if lt IE 9]>
 <script src="${g.resource(dir: 'js', file: 'html5shiv.js')}"></script>
 <script src="${g.resource(dir: 'js', file: 'json3.min.js')}"></script>
 <script src="${g.resource(dir: 'js', file: 'angular.shiv.js')}"></script>
 <script src="${g.resource(dir: 'js', file: 'respond.min.js')}"></script>
 <![endif]-->
+</g:if>
 <script type="text/javascript">
    var baseUrl = '<g:resource dir="json"/>';
    var partials = {
@@ -39,9 +42,11 @@
       s.parentNode.insertBefore(ga, s);
    })();
 </script>
+<g:if test="${!isBot}">
 <r:resourceLink dir="css/highlight" file="ir_black.css"/>
 <script type="text/javascript" src="${resource(dir: 'js', file: 'highlight.pack.js')}"></script>
 <r:require modules="angular, app"/>
+</g:if>
 <r:layoutResources/>
 </head>
 <body id="ng-app" ng-app="zcarioca">
@@ -55,11 +60,22 @@
       <!-- end header.main -->
       <a href="#body-content" class="nav-skip">Skip Navigation</a>
       <aside class="main">
-         <nav ng-controller="MainMenuController">
-            <a ng-repeat="page in pages" href="{{page.link}}" ng-click="setActive(page.slug)" ng-class="page.state">
-               {{page.title}}
-            </a>
-         </nav>
+         <g:if test="${pagePreviews}">
+            <nav>
+               <g:each in="${pagePreviews }" var="pagePreview">
+                  <a href="#!/page/${pagePreview.slug}">${pagePreview.title}</a>
+               </g:each>
+               <a href="#!/proj">Projects</a>
+               <a href="#!/blog">Blog</a>
+            </nav>
+         </g:if>
+         <g:else>
+            <nav ng-controller="MainMenuController">
+               <a ng-repeat="page in pages" href="{{page.link}}" ng-click="setActive(page.slug)" ng-class="page.state">
+                  {{page.title}}
+               </a> 
+            </nav>
+         </g:else>
       </aside>
       <!-- end aside.main -->
       <section id="body-content" class="content" ng-view>

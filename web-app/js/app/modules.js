@@ -1,6 +1,7 @@
 /* website module */
 angular.module('zcarioca', ['zcariocaServices']).
-   config(['$routeProvider',function($routeProvider) {
+   config(['$routeProvider','$locationProvider',function($routeProvider, $locationProvider) {
+   $locationProvider.html5Mode(false).hashPrefix('!');
    $routeProvider.
       when('/page/:pageName', {templateUrl: partials.page, controller: PageContentController}).
       when('/blog/:blogName', {templateUrl: partials.blog, controller: BlogContentController}).

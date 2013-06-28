@@ -108,15 +108,16 @@ article nav a {
 article nav a:hover, article nav a:active {
    border: 0;
 }
-article article {
+.blog-item {
    padding: 0.5em 0;
    border-bottom: 1px dotted #fff;
 }
-article article header {
+.blog-item header {
    font-size: 1.2em;
    padding-bottom: 0.3em;
+   display: block;
 }
-article article header time {
+.blog-item time {
    display: block;
 }
 footer a {

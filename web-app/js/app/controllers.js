@@ -43,17 +43,17 @@ var MainMenuController = [ '$scope', 'DataLookupService', 'MainLookupService', f
          type: 'blog',
          id: 'blog',
          slug: 'blog',
-         link: '#/blog'
+         link: '#!/blog'
       }, proj = {
          title: 'Projects',
          type: 'proj',
          id: 'proj',
          slug: 'proj',
-         link: '#/proj'
+         link: '#!/proj'
       };
       $scope.loading = false;
       angular.forEach(data.pages, function(page) {
-         page.link = '#/page/' + page.slug;
+         page.link = '#!/page/' + page.slug;
          if (page.id === $scope.activePage) {
             page.state = 'active';
          }

@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>Z Carioca - Software Developer</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<g:if test="${isUser}">
+<g:if test="${isUser && !isTextOnly}">
 <link href="${g.resource(dir: 'css', file: 'screen.css')}" rel="stylesheet" type="text/css" media="screen, projection"/>
 <!--[if lt IE 9]>
 <script src="${g.resource(dir: 'js', file: 'html5shiv.js')}"></script>
@@ -32,7 +32,7 @@
 <body id="ng-app" ng-app="zcarioca">
    <div class="container">
       <header class="main">
-         <g:if test="${isUser }">
+         <g:if test="${isUser && !isTextOnly}">
          <figure>
             <img src="${resource(dir: 'images', file: 'masthead_2.png') }" title="Z Carioca" alt="Z Carioca"/>
          </figure>
@@ -52,6 +52,16 @@
                <a href="#!/proj">Projects</a> <a href="#!/blog">Blog</a>
             </nav>
          </g:if>
+         <g:if test="${isTextOnly }">
+            <nav>
+               <g:each in="${menuItems }" var="menuItem">
+                  <a href="?page=/page/${menuItem.slug}">
+                     ${menuItem.title}
+                  </a>
+               </g:each>
+               <a href="?page=/proj">Projects</a> <a href="?page=/blog">Blog</a>
+            </nav>
+         </g:if>
          <g:else>
             <nav ng-controller="MainMenuController">
                <a ng-repeat="page in pages" href="{{prefix}}{{page.link}}" ng-click="setActive(page.slug)" ng-class="page.state">
@@ -62,7 +72,7 @@
       </aside>
       <!-- end aside.main -->
       <section id="body-content" class="content" ng-view>
-         <g:if test="${isBot}">
+         <g:if test="${isBot || isTextOnly}">
             <article>
                <h1>${title}</h1>
                ${body }
@@ -70,7 +80,7 @@
          </g:if>
       </section>
       <footer>
-         <g:if test="${isUser}">
+         <g:if test="${isUser && !isTextOnly}">
          <figure>
             <img src="${resource(dir: 'images', file:'footer.png') }"/>
          </figure>

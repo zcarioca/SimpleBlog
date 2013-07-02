@@ -13,8 +13,12 @@ class IndexController {
          isUser     : true,
          menuItems  : restService.getPagePreviews()
       ]
-      def userAgent = request.getHeader('User-Agent')
-      if (userAgent?.toLowerCase()?.contains("google")) {
+      def userAgent = request.getHeader('User-Agent')?.toLowerCase()
+      println "UserAgent: ${userAgent}"
+      boolean textBrowser = userAgent?.contains('links') || userAgent?.contains('lynx')
+      boolean google = userAgent?.contains('google')
+      
+      if (google) {
          def queryFragment = params['_escaped_fragment_']
          
          def queryData = fetchQueryFragmentData(queryFragment)
@@ -25,12 +29,17 @@ class IndexController {
          queryData.each { key, value ->
             map[key] = value
          }
-      } else {
-         def queryData = fetchQueryFragmentData('') 
+      } else if (textBrowser) {
+         def queryFragment = params['page']
+         
+         def queryData = fetchQueryFragmentData(queryFragment)
+         
+         map.isTextOnly = true
+         
          queryData.each { key, value ->
             map[key] = value
          }
-      }
+      } 
       return map
    }
    

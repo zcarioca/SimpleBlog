@@ -88,10 +88,10 @@ class RestService {
       for (def i = 0; i < previews.size(); i++) {
          if (previews[i].slug == postId) {
             if (i + 1 < previews.size()) {
-               postBlock.next = previews[i+1]?.slug
+               postBlock.prev = previews[i+1]?.slug
             }
             if (i - 1 >= 0) {
-               postBlock.prev = previews[i-1]?.slug
+               postBlock.next = previews[i-1]?.slug
             }
          }
       }

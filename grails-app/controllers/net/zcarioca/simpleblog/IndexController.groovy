@@ -7,18 +7,26 @@ class IndexController {
    def restService
 
    def index() {
-      def map = [ isBot : false, isUser: true ]
+      def map = [ 
+         isBot      : false,
+         isTextOnly : false, 
+         isUser     : true,
+         menuItems  : restService.getPagePreviews()
+      ]
       def userAgent = request.getHeader('User-Agent')
       if (userAgent?.toLowerCase()?.contains("google")) {
-         def pagePreviews = restService.getPagePreviews()
          def queryFragment = params['_escaped_fragment_']
          
          def queryData = fetchQueryFragmentData(queryFragment)
          
          map.isBot = true
          map.isUser = false
-         map.pagePreviews = pagePreviews
          
+         queryData.each { key, value ->
+            map[key] = value
+         }
+      } else {
+         def queryData = fetchQueryFragmentData('') 
          queryData.each { key, value ->
             map[key] = value
          }

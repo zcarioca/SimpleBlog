@@ -16,87 +16,77 @@ var CodeBlockParser = {
                   hljs.highlightBlock(codeTag, null, false);
                   codeTag.setAttribute('class', codeTag.getAttribute('class') + ' pretty-print');
                }
-               /*
-               var lines = CodeBlockParser.getLines(codeTag),
-                   newHtml = '',
-                   idx = 0; 
-               
-               angular.forEach(lines, function(line) {
-                  var className = (idx % 2) === 0 ? 'even' : 'odd'
-                  newHtml += '<div class="'+className +'">' + line + '</div>';
-                  idx += 1;
-               });
-               newHtml += '';
-               codeTag.innerHTML = newHtml;
-               */
             });
          });
       });
    }
 };
-var MainMenuController = [ '$scope', 'DataLookupService', 'MainLookupService', function($scope, DataLookupService, MainLookupService) {
+var MainMenuController = [ '$scope', '$location', function($scope, $location) {
    $scope.pages = [];
    $scope.loading = true;
-   MainLookupService.query(function(data) {
-      var blog = {
+   $scope.activePage = null;
+   $scope.prefix = '#!';
+   
+   $scope.loadMenu = function() {
+      var location = $location.path();
+      menu.push({
          title: 'Blog',
          type: 'blog',
          id: 'blog',
          slug: 'blog',
-         link: '#!/blog'
-      }, proj = {
+         link: '/blog'
+      }); 
+      menu.push({
          title: 'Projects',
          type: 'proj',
          id: 'proj',
          slug: 'proj',
-         link: '#!/proj'
-      };
+         link: '/proj'
+      });
       $scope.loading = false;
-      angular.forEach(data.pages, function(page) {
-         page.link = '#!/page/' + page.slug;
-         if (page.id === $scope.activePage) {
-            page.state = 'active';
-         }
-         DataLookupService.addPage(page);
-      });
+      $scope.pages = menu;
       
-      if (blog.id === $scope.activePage) {
-         blog.state = 'active';
+      if ($scope.activePage === null) {
+         if (location && location !== '') {
+            if (location.indexOf('/page') > -1) {
+               location = location.substring(location.lastIndexOf('/') + 1);
+            } else if (location.indexOf('/blog') > -1) {
+               location = 'blog';
+            } else {
+               location = 'proj';
+            }
+            $scope.setActive(location);
+         } else {
+            $scope.setActive(menu[0].slug);
+            $location.path(menu[0].link);
+         }
       }
-      DataLookupService.addPage(proj);
-      DataLookupService.addPage(blog);
-      $scope.pages = DataLookupService.getPages();
-      if (!DataLookupService.hasActivePage()) {
-         DataLookupService.activatePage($scope.pages[0].slug);
-      }
-
-      // do posts
-      angular.forEach(data.projects, function(proj) {
-         DataLookupService.addProject(proj);
-      });
-      angular.forEach(data.posts, function(post) {
-         DataLookupService.addPost(post);
-      });
-   });
-   $scope.setActive = function(page) {
-      DataLookupService.activatePage(page);
    };
+   
+   $scope.setActive = function(slug) {
+      angular.forEach($scope.pages, function(page) {
+         if (page.slug === slug) {
+            page.state = 'active';
+            $scope.activePage = page.link;
+         } else {
+            page.state = 'inactive';
+         }
+      })
+   };
+   
+   $scope.loadMenu();
 }];
 
-var PageContentController = [ '$scope', 'DataLookupService', 'PageLookupService', '$routeParams', function($scope, DataLookupService, PageLookupService, $routeParams) {
+var PageContentController = [ '$scope', 'PageLookupService', '$routeParams', function($scope, PageLookupService, $routeParams) {
    $scope.loading = true;
-   DataLookupService.getPageBySlug($routeParams.pageName, function(page) {
-      PageLookupService.get({pageId: page.id}, function(data) {
-         $scope.loading = false;
-         $scope.page = data.page;
-         DataLookupService.activatePage(data.page.slug);
-         
-      });
+   PageLookupService.get({pageId: $routeParams.pageName}, function(data) {
+      $scope.loading = false;
+      $scope.page = data.page;
    });
 }];
 
-var ProjRollController = [ '$scope', 'DataLookupService', function($scope, DataLookupService) {
-   $scope.posts = DataLookupService.getProjects();
+var ProjRollController = [ '$scope', 'MainLookupService', function($scope, MainLookupService) {
+   $scope.posts = [];
    $scope.loading = false;
    $scope.filterQuery = function(post) {
       var query = null;
@@ -106,25 +96,31 @@ var ProjRollController = [ '$scope', 'DataLookupService', function($scope, DataL
       query = angular.lowercase($scope.query);
       return angular.lowercase(post.title).indexOf(query) !== -1 || angular.lowercase(post.content).indexOf(query) !== -1;
    };
-   DataLookupService.activatePage('proj');
+   if ($scope.posts.length === 0) {
+      $scope.loading = true;
+      MainLookupService.get(function(data) {
+         $scope.posts = data.projects;
+         angular.forEach($scope.posts, function(post) {
+            post.link = '#!/proj/' + post.slug;
+         }); 
+         $scope.loading = false;
+      });
+   }
 }];
 
-var ProjContentController = [ '$scope', 'DataLookupService', 'ProjectLookupService', '$routeParams', function($scope, DataLookupService, ProjectLookupService, $routeParams) {
+var ProjContentController = [ '$scope', 'ProjectLookupService', '$routeParams', function($scope, ProjectLookupService, $routeParams) {
    $scope.loading = true;
-   DataLookupService.getProjectBySlug($routeParams.projName, function(post) {
-      ProjectLookupService.get({projId: post.id}, function(data) {
-         $scope.loading = false;
-         $scope.page = data.project;
-         $scope.page.showNext = false;
-         $scope.page.showPrev = false;
-         DataLookupService.activatePage('proj');
-         CodeBlockParser.setupLines();
-      });
+   ProjectLookupService.get({projId: $routeParams.projName}, function(data) {
+      $scope.loading = false;
+      $scope.page = data.project;
+      $scope.page.showNext = false;
+      $scope.page.showPrev = false;
+      CodeBlockParser.setupLines();
    });
 }];
 
-var BlogRollController = [ '$scope', 'DataLookupService', function($scope, DataLookupService) {
-   $scope.posts = DataLookupService.getPosts();
+var BlogRollController = [ '$scope', 'MainLookupService', function($scope, MainLookupService) {
+   $scope.posts = [];
    $scope.loading = false;
    $scope.filterQuery = function(post) {
       var query = null;
@@ -134,21 +130,27 @@ var BlogRollController = [ '$scope', 'DataLookupService', function($scope, DataL
       query = angular.lowercase($scope.query);
       return angular.lowercase(post.title).indexOf(query) !== -1 || angular.lowercase(post.content).indexOf(query) !== -1;
    };
-   DataLookupService.activatePage('blog');
+   if ($scope.posts.length === 0) {
+      $scope.loading = true;
+      MainLookupService.get(function(data) {
+         $scope.posts = data.posts;
+         angular.forEach($scope.posts, function(post) {
+            post.link = '#!/blog/' + post.slug;
+         }); 
+         $scope.loading = false;
+      });
+   }
 }];
 
-var BlogContentController = [ '$scope', 'DataLookupService', 'BlogLookupService', '$routeParams', function($scope, DataLookupService, BlogLookupService, $routeParams) {
+var BlogContentController = [ '$scope', 'BlogLookupService', '$routeParams', function($scope, BlogLookupService, $routeParams) {
    $scope.loading = true;
-   DataLookupService.getPostBySlug($routeParams.blogName, function(post) {
-      BlogLookupService.get({blogId: post.id}, function(data) {
-         $scope.loading = false;
-         $scope.page = data.post;
-         $scope.page.next = post.next;
-         $scope.page.prev = post.prev;
-         $scope.page.showNext = post.next === null ? false : true;
-         $scope.page.showPrev = post.prev === null ? false : true;
-         DataLookupService.activatePage('blog');
-         CodeBlockParser.setupLines();
-      });
+   BlogLookupService.get({blogId: $routeParams.blogName}, function(data) {
+      $scope.loading = false;
+      $scope.page = data.post;
+      $scope.page.next = data.post.next;
+      $scope.page.prev = data.post.prev;
+      $scope.page.showNext = typeof(data.post.next) === 'undefined' || data.post.next === null ? false : true;
+      $scope.page.showPrev = typeof(data.post.prev) === 'undefined' || data.post.prev === null ? false : true;
+      CodeBlockParser.setupLines();
    });
 }];

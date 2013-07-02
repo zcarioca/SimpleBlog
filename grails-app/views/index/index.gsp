@@ -17,32 +17,12 @@
 <script src="${g.resource(dir: 'js', file: 'angular.shiv.js')}"></script>
 <script src="${g.resource(dir: 'js', file: 'respond.min.js')}"></script>
 <![endif]-->
-</g:if>
 <script type="text/javascript">
    var baseUrl = '<g:resource dir="json"/>';
-   var partials = {
-      'blog': '<g:resource dir="partials" file="blog.html"/>',
-      'blogRoll': '<g:resource dir="partials" file="blog-roll.html"/>',
-      'page': '<g:resource dir="partials" file="page.html"/>',
-      'project': '<g:resource dir="partials" file="proj.html"/>',
-      'projectRoll': '<g:resource dir="partials" file="proj-roll.html"/>'
-   };
-   var _gaq = _gaq || [];
-   _gaq.push([ '_setAccount', 'UA-39324990-1' ]);
-   _gaq.push([ '_setDomainName', 'zcarioca.net' ]);
-   _gaq.push([ '_setAllowLinker', true ]);
-   _gaq.push([ '_trackPageview' ]);
-
-   (function() {
-      var ga = document.createElement('script');
-      ga.type = 'text/javascript';
-      ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(ga, s);
-   })();
+   var menu = <simpleBlog:menuJS menuItems="${menuItems}"/>;
+   var partials = <simpleBlog:staticFiles/>;
 </script>
-<g:if test="${isUser}">
+<simpleBlog:googleAnalytics/>
 <r:resourceLink dir="css/highlight" file="ir_black.css"/>
 <script type="text/javascript" src="${resource(dir: 'js', file: 'highlight.pack.js')}"></script>
 <r:require modules="angular, app"/>
@@ -62,18 +42,19 @@
       <!-- end header.main -->
       <a href="#body-content" class="nav-skip">Skip Navigation</a>
       <aside class="main">
-         <g:if test="${pagePreviews}">
+         <g:if test="${isBot}">
             <nav>
-               <g:each in="${pagePreviews }" var="pagePreview">
-                  <a href="#!/page/${pagePreview.slug}">${pagePreview.title}</a>
+               <g:each in="${menuItems }" var="menuItem">
+                  <a href="#!/page/${menuItem.slug}">
+                     ${menuItem.title}
+                  </a>
                </g:each>
-               <a href="#!/proj">Projects</a>
-               <a href="#!/blog">Blog</a>
+               <a href="#!/proj">Projects</a> <a href="#!/blog">Blog</a>
             </nav>
          </g:if>
          <g:else>
             <nav ng-controller="MainMenuController">
-               <a ng-repeat="page in pages" href="{{page.link}}" ng-click="setActive(page.slug)" ng-class="page.state">
+               <a ng-repeat="page in pages" href="{{prefix}}{{page.link}}" ng-click="setActive(page.slug)" ng-class="page.state">
                   {{page.title}}
                </a> 
             </nav>

@@ -8,7 +8,7 @@
       <h2>Projects</h2>
    </header>
    <div ng-show="loading">Loading...</div>
-   <article class="blog-item" ng-repeat="post in posts | filter : filterQuery" ng-class="$index % 2 == 0 && 'even' || 'odd'">
+   <div class="blog-item" ng-repeat="post in posts | filter : filterQuery" ng-class="$index % 2 == 0 && 'even' || 'odd'">
       <header>
          <a href="{{post.link}}">{{post.title}}</a>
          <time>{{post.date}}</time>
@@ -16,5 +16,5 @@
       <div class="proj-roll-details" hideon="blogDetails">
          <div class="proj-roll-preview" ng-bind-html-unsafe="post.content"></div>
       </div>
-   </article>
+   </div>
 </article>

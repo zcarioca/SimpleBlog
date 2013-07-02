@@ -78,15 +78,29 @@ class RestService {
    }
    
    def getProjectById(projId) {
-      return projBlock(Project.get(projId))
+      return projBlock(Project.findBySlug(projId))
    }
    
    def getPostById(postId) {
-      return postBlock(Post.get(postId))
+      def previews = getPostPreviews()
+      def postBlock = postBlock(Post.findBySlug(postId))
+      
+      for (def i = 0; i < previews.size(); i++) {
+         if (previews[i].slug == postId) {
+            if (i + 1 < previews.size()) {
+               postBlock.next = previews[i+1]?.slug
+            }
+            if (i - 1 >= 0) {
+               postBlock.prev = previews[i-1]?.slug
+            }
+         }
+      }
+      return postBlock
    }
    
    def getPageById(pageId) {
-      return pageBlock(Page.get(pageId))
+      def page = Page.findBySlug(pageId)
+      return pageBlock(page)
    }
    
    def getPostsByAuthor(username) {

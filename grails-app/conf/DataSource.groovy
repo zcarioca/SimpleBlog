@@ -34,18 +34,19 @@ environments {
             //url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
             url = "jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/zcarioca"
             username = "zcarioca"
-/*
             properties {
-               maxActive = -1
+               initialSize = 0
+               maxActive = 8
+               maxIdle = 8
+               minIdle= 0
                minEvictableIdleTimeMillis=1800000
                timeBetweenEvictionRunsMillis=1800000
                numTestsPerEvictionRun=3
                testOnBorrow=true
                testWhileIdle=true
-               testOnReturn=true
+               testOnReturn=false
                validationQuery="SELECT 1"
             }
-*/
         }
     }
 }

@@ -69,8 +69,8 @@ class IndexController {
             map.body = body.toString()
             return map
          } else {
-         def page = Project.findBySlug(query.substring(query.lastIndexOf('/') + 1))
-            return [ type : 'page', title: page.title, body : restService.toHTML(page.body) ]
+            def page = Project.findBySlug(query.substring(query.lastIndexOf('/') + 1))
+            return [ type : 'page', title: page?.title, body : restService.toHTML(page?.body) ]
          }
       }
       if (StringUtils.startsWith(query, "/blog")) {

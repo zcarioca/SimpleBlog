@@ -64,9 +64,11 @@
          </g:if>
          <g:else>
             <nav ng-controller="MainMenuController">
+            <g:if test="${isUser && !isTextOnly }">
                <a ng-repeat="page in pages" href="{{prefix}}{{page.link}}" ng-click="setActive(page.slug)" ng-class="page.state">
                   {{page.title}}
-               </a> 
+               </a>
+            </g:if>
             </nav>
          </g:else>
       </aside>

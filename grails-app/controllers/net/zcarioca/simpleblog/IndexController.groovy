@@ -83,7 +83,7 @@ class IndexController {
             def body = new StringBuilder()
             posts.each { post ->
                body << '<div>'
-               body << "<a href=\"#!/proj/${post.slug}\">${post.title}</a>"
+               body << "<a href=\"#!/blog/${post.slug}\">${post.title}</a>"
                body << post.content
                body << '</div>'
             }

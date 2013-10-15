@@ -66,7 +66,7 @@ class SynopsisService {
 
          StringBuffer newContent = new StringBuffer()
 
-         Matcher matcher = content =~ /<(h|H)\d>[\w\s]+<\/(h|H)\d>/
+         Matcher matcher = content =~ /<(h|H)\d>(?:(?!<\/h).)*<\/(h|H)\d>/
 
          while (matcher.find()) {
             def replacement = new StringBuffer(matcher.group())

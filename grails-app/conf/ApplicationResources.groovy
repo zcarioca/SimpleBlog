@@ -17,5 +17,6 @@ modules = {
        resource url: 'js/app/modules.js', disposition: 'head'
        resource url: 'js/app/services.js', disposition: 'head'
        resource url: 'js/app/controllers.js', disposition: 'head'
+       resource url: 'js/misc.js', disposition: 'head'
     }
 }

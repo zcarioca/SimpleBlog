@@ -92,6 +92,38 @@ article a {
 article a:hover, article a:active {
    border-bottom: 1px dotted #62cbe0;
 }
+ul.table-of-contents {
+   list-style: none;
+   margin: 1em 0;
+   padding: 1em 0;
+   border-top: 1px dotted #62cbe0;
+   border-bottom: 1px dotted #62cbe0;
+}
+ul.table-of-contents ul {
+   list-style: disc;
+}
+h1,h2,h3,h4,h5,h6 {
+   color: #fed702;
+   font-weight: bold;
+   line-height: 1;
+}
+h3 { 
+   font-size: 1.8em; 
+   text-decoration: underline;
+   margin: 0; 
+}
+h4 { 
+   font-size: 1.5em; 
+   margin: 0; 
+}
+h5 { 
+   font-size: 1.3em;
+   margin: 0; 
+}
+h6 { 
+   font-size: 1em;
+   margin: 0;
+}
 article h1, article h2 {
    font-size: 3em;
    line-height: 1;

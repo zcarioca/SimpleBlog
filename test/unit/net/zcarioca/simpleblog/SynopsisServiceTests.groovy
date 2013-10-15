@@ -11,7 +11,33 @@ import org.junit.*
 @TestFor(SynopsisService)
 class SynopsisServiceTests {
 
-    void testSomething() {
-        fail "Implement me"
-    }
+   SynopsisService service = new SynopsisService()
+
+   void testMakeHTML() {
+      String markdown = """
+This is a test of the table of contents
+
+{:toc}
+
+##The first header
+
+Some content
+
+##The second header
+
+More content
+
+###internal header
+
+more content
+
+## Last header
+
+#Main Header 03
+
+end of content
+"""
+      def output = service.makeHTML(markdown)
+      println output
+   }
 }
